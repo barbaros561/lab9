@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>BLOG</title>
+    <meta charset="UTF-8"/>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #ffffff;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+<form action="/newpost" method="POST">
+    Tytuł: <input type="text" name="title" size="150"/><br/>
+    Treść:
+    <textarea name="content" cols="150" rows="5"/>
+    <input type="submit" value="Dodaj wpis" />
+</form>
+<table class="table">
+    <tr>
+        <th style="text-align: center">Numer</th>
+        <th style="text-align: center">Tytuł</th>
+        <th style="text-align: center">Tresc</th>
+        <th style="text-align: center">Usuwanie wpisu</th>
+    </tr>
+    <tr th:each="posts : ${posts}">
+        <td style="text-align: center" th:text="${posts.id}"></td>
+        <td style="text-align: center" th:text="${posts.title}"></td>
+        <td style="text-align: center" th:text="${posts.content}"></td>
+        <td> <a th:href="@{/post(id=${posts.id})}">Usuń</a></td>
+    </tr>
+
+</table>
+</body>
+</html>
